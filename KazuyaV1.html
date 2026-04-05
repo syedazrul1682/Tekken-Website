@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Kazuya Mishima - Tekken Fighter</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+/* LIVE VIDEO BACKGROUND */
+
+#bgVideo{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+}
+
+/* DARK OVERLAY */
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:-1;
+}
+
+/* BODY */
+
+body{
+color:white;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+/* MAIN LAYOUT */
+
+.container{
+width:1200px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:60px;
+}
+
+/* CHARACTER IMAGE */
+
+.fighterImg img{
+width:520px;
+transform:scale(1.4);
+transform-origin:left;
+}
+
+/* RIGHT SIDE CONTENT */
+
+.content{
+max-width:520px;
+}
+
+/* TITLE */
+
+.content h1{
+font-size:70px;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+.subtitle{
+font-size:26px;
+color:#cfd6ff;
+margin-bottom:30px;
+}
+
+/* INFO BOXES */
+
+.infoBoxes{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.box{
+border:2px solid #00c3ff;
+padding:12px 20px;
+font-size:14px;
+}
+
+/* STORY */
+
+.story{
+line-height:1.7;
+color:#d0d0d0;
+margin-bottom:40px;
+}
+
+/* BUTTON */
+
+.downloadBtn{
+background:#ff0055;
+border:none;
+padding:14px 35px;
+font-weight:bold;
+color:white;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+}
+
+.downloadBtn:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #ff0055;
+}
+
+/* BACK BUTTON */
+
+.backBtn{
+position:absolute;
+top:30px;
+left:30px;
+background:#ff0055;
+border:none;
+padding:10px 20px;
+color:white;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LIVE BACKGROUND VIDEO -->
+<video autoplay muted loop playsinline id="bgVideo">
+<source src="tekken8gif2.mp4" type="video/mp4">
+</video>
+
+<button class="backBtn" onclick="history.back()">← Back</button>
+
+<div class="container">
+
+<!-- LEFT IMAGE -->
+
+<div class="fighterImg">
+<img src="images/kazuya-removebg-preview.png">
+</div>
+
+<!-- RIGHT CONTENT -->
+
+<div class="content">
+
+<h1>Kazuya Mishima</h1>
+<p class="subtitle">Devil Kazuya</p>
+
+<div class="infoBoxes">
+
+<div class="box">COUNTRY:  Japan</div>
+<div class="box">STYLE: Mishima Style Fighting Karate
+</div>
+<div class="box">BIRTHDAY: SEPTEMBER 10TH</div>
+
+</div>
+
+<p class="story">
+
+Kazuya Mishima is a central antagonist and iconic character in Bandai Namco's Tekken series, known as a ruthless, power-hungry martial artist driven by revenge against his father, Heihachi. After being thrown off a cliff as a child, he embraced the demonic Devil Gene to survive, transforming into a formidable fighter who battles for control of the Mishima Zaibatsu and global domination.
+</p>
+
+<h3>CHARACTER COMBO MOVE SET</h3>
+
+<br>
+
+<button class="downloadBtn">DOWNLOAD</button>
+
+</div>
+
+</div>
+
+</body>
+</html>

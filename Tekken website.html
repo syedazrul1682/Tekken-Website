@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Offical Fighters Roster - Tekken Fan Website</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Social Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* Slide 2 smaller boxes and text */
+.slides .slide:nth-child(2) .reviewScore {
+    transform: scale(1.8); /* shrink the whole box */
+}
+
+.slides .slide:nth-child(2) .reviewScore h1 {
+    font-size: clamp(20px, 2.5vw, 32px); /* smaller number */
+}
+
+.slides .slide:nth-child(2) .reviewScore p {
+    padding: 3px 7px; /* smaller label box */
+    font-size: 10px; /* smaller text inside label */
+}
+    
+/* Slide 2 text white */
+.slides .slide:nth-child(2) .reviewScore h1,
+.slides .slide:nth-child(2) .reviewScore p {
+    color: white !important;
+    text-shadow: none !important; /* remove red glow if any */
+}
+
+.slides .slide:nth-child(2) .reviewScore h1 span {
+    color: white !important; /* make the /10 white too */
+}
+
+/* REVIEW SCORE STYLE (CLEAN WHITE, NO GLOW) */
+
+.reviewScore{
+    position:absolute;
+    color:white;
+    z-index:3;
+}
+
+/* NUMBER */
+.reviewScore h1{
+    font-size:clamp(26px, 3vw, 40px);
+    font-weight:800;
+    color:white; /* force white */
+    text-shadow:none; /* remove glow */
+}
+
+.reviewScore h1 span{
+    color:#ff0055; /* keep the /10 red */
+}
+
+/* LABEL (TEXT INSIDE BOX) */
+.reviewScore p{
+    background:#ff0055;
+    color:white;
+    display:inline-block;
+    padding:5px 10px;
+    margin-top:5px;
+    font-size:12px;
+    font-weight:bold;
+    text-shadow:none; /* no glow */
+}
+
+/* LEFT SIDE */
+.reviewScore.left{
+    left:15%;
+}
+
+/* RIGHT SIDE */
+.reviewScore.right{
+    right:15%;
+    text-align:right;
+}
+
+/* POSITIONING (better spacing) */
+.reviewScore.top{ top:18%; }
+.reviewScore.middle{ top:42%; }
+.reviewScore.bottom{ top:66%; }
+.platforms img{
+height:40px !important;
+width:auto !important;
+vertical-align:middle;
+margin-right:6px;
+}
+    
+/* DARK GRADIENT OVERLAY */
+.darkOverlay{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0.9));
+z-index:1;
+}
+
+/* RIGHT SIDE CONTENT */
+.heroContent{
+position:absolute;
+top:50%;
+right:8%;
+transform:translateY(-50%);
+text-align:left;
+color:white;
+z-index:2;
+max-width:500px;
+}
+
+.heroContent h1{
+font-size:70px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+.heroContent h2{
+font-size:45px;
+margin:20px 0;
+font-weight:bold;
+}
+
+/* PLATFORM TEXT */
+.platforms{
+    margin-top:15px;
+    display:flex;
+    align-items:center;
+    gap:15px; /* smaller spacing */
+    font-size:16px;
+}
+
+/* TOP SCORES */
+.topScores{
+position:absolute;
+top:40px;
+right:8%;
+display:flex;
+gap:20px;
+z-index:2;
+}
+
+.topScores span{
+font-weight:bold;
+background:rgba(0,0,0,0.6);
+padding:8px 14px;
+border-left:4px solid #ff0055;
+}
+
+/* FIX VIDEO FULLSCREEN */
+.slideVideo{
+width:100%;
+height:120vh;
+object-fit:cover;
+}    
+
+/* ===== REVIEW SLIDER ===== */
+
+.reviewSlider{
+position:relative;
+width:100%;
+height:120vh;
+overflow:hidden;
+}
+
+.slides{
+display:flex;
+transition:0.6s ease;
+}
+
+.slide{
+min-width:100%;
+position:relative;
+}
+
+.slide img,
+.slide video{
+width:100%;
+height:120vh;
+object-fit:cover;
+background:transparent;
+filter:brightness(0.7);
+}
+    
+.slideVideo{
+width:100%;
+height:500px;
+object-fit:cover;
+}
+
+.reviewOverlay{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:white;
+}
+
+.reviewOverlay h1{
+font-size:60px;
+text-shadow:0 0 20px red;
+}
+
+.reviewOverlay h2{
+font-size:40px;
+color:gold;
+margin:10px 0;
+}
+
+.scores{
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+justify-content:center;
+}
+
+.scores span{
+background:#ff0055;
+padding:10px 15px;
+font-weight:bold;
+box-shadow:0 0 10px red;
+}
+
+.prev,.next{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.6);
+color:white;
+border:none;
+font-size:30px;
+padding:10px;
+cursor:pointer;
+z-index:10;
+}
+
+.prev{left:10px;}
+.next{right:10px;}
+    
+.fighterCard:hover{
+transform:scale(1.1) rotateY(10deg);
+}
+
+/* LIVE BACKGROUND VIDEO */
+    
+#bgVideo{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(2.0) contrast(1.2);
+}
+
+/* GLOBAL */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+scroll-behavior:smooth;
+}
+
+body{
+background-color:black;
+}
+
+
+/* NAVBAR */
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:black;
+z-index:100;
+border-bottom:1px solid #222;
+}
+
+.logo{
+color:white;
+font-size:28px;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+.nav-center a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+position:relative;
+}
+
+.nav-center a::after{
+content:'';
+position:absolute;
+width:0%;
+height:2px;
+background:red;
+left:0;
+bottom:-5px;
+transition:0.3s;
+}
+
+.nav-center a:hover::after{
+width:100%;
+}
+
+.nav-right{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.nav-right i{
+color:white;
+font-size:20px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.nav-right i:hover{
+color:red;
+transform:scale(1.2);
+}
+
+.buyBtn{
+background:#ff0055;
+border:none;
+color:white;
+padding:10px 20px;
+font-weight:bold;
+cursor:pointer;
+border-radius:5px;
+transition:0.3s;
+}
+
+.buyBtn:hover{
+background:red;
+transform:scale(1.1);
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background:rgba(0,0,0,0.6);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:80px;
+color:red;
+text-shadow:0 0 20px red;
+animation:glow 2s infinite alternate;
+}
+
+.hero p{
+font-size:35px;
+margin:20px 0;
+color:red;
+text-shadow:0 0 20px red;
+animation:glow 2s infinite alternate;
+}
+
+.hero button{
+padding:15px 40px;
+background:red;
+border:none;
+font-size:18px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.hero button:hover{
+transform:scale(1.1);
+}
+
+
+/* SECTIONS */
+
+.section{
+padding:100px 60px;
+text-align:center;
+font-size:20px;
+color:goldenrod;
+text-shadow:0 0 20px red;
+animation:glow 4s infinite alternate;
+background:rgba(0,0,0,0.75);
+}
+
+.section h2{
+font-size:50px;
+color:red;
+text-shadow:0 0 20px red;
+margin-bottom:40px;
+}
+
+.section h3{
+font-size:35px;
+color:red;
+text-shadow:0 0 20px red;
+margin-bottom:20px;
+}
+
+/* CHARACTERS */
+
+.characters{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+}
+
+.character{
+width:260px;
+background:#111;
+border:2px solid #222;
+overflow:hidden;
+transition:0.4s;
+cursor:pointer;
+opacity:0;
+transform:translateY(40px);
+}
+
+.character img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.character:hover{
+transform:scale(1.1);
+border-color:red;
+box-shadow:0 0 20px red;
+}
+
+/* GAME MODES */
+
+.modes{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.mode{
+background:#111;
+padding:30px;
+border:2px solid #222;
+transition:0.3s;
+opacity:0;
+transform:translateY(40px);
+}
+
+.mode:hover{
+border-color:red;
+transform:translateY(-10px);
+}
+
+/* TRAILER SECTION */
+
+.trailer{
+padding:100px 60px;
+text-align:center;
+font-size:20px;
+color:red;
+text-shadow:0 0 20px red;
+animation:glow 4s infinite alternate;
+background:rgba(0,0,0,0.75);
+}
+
+.trailer iframe{
+width:80%;
+height:500px;
+border:3px solid red;
+box-shadow:0 0 20px red;
+}
+
+/* PARALLAX */
+
+.parallax{
+height:400px;
+background:url("https://images5.alphacoders.com/132/1322308.jpeg") center/cover fixed;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+text-shadow:0 0 20px red;
+}
+
+/* FOOTER */
+
+
+footer{
+padding:100px 60px;
+text-align:center;
+font-size:20px;
+color:red;
+text-shadow:0 0 20px red;
+animation:glow 4s infinite alternate;
+background:rgba(0,0,0,0.75);
+}
+    
+footer a{
+color:white;
+margin:0 20px;
+font-size:50px;
+transition:0.3s;
+}
+
+footer a:hover{
+color:red;
+text-shadow:0 0 20px red;
+transform:scale(1.2);
+}
+
+/* TRAILER */
+    
+trailer {padding:100px 60px;
+text-align:center;
+font-size:20px;
+color:red;
+text-shadow:0 0 20px red;
+animation:glow 4s infinite alternate;
+background:rgba(0,0,0,0.75);}
+    
+/* BACK TO TOP BUTTON */
+
+#topBtn{
+position:fixed;
+bottom:30px;
+right:30px;
+font-size:22px;
+background:red;
+color:white;
+border:none;
+padding:12px 16px;
+cursor:pointer;
+display:none;
+}
+
+/* IGN REVIEW SECTION */
+
+.review{
+padding:120px 60px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:50px;
+background:rgba(0,0,0,0.85);
+}
+
+.review img{
+width:500px;
+border:3px solid red;
+box-shadow:0 0 30px red;
+}
+
+.reviewContent{
+max-width:500px;
+color:white;
+position:relative;
+background:#111;
+padding:40px;
+}
+
+.rating{
+position:absolute;
+top:-35px;
+right:0;
+background:#ff0055;
+padding:20px 35px;
+font-size:35px;
+font-weight:bold;
+}
+
+.watchBtn{
+margin-top:20px;
+padding:12px 30px;
+border:none;
+background:red;
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.watchBtn:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px red;
+}
+
+/* CHARACTER GLOW IMPROVEMENT */
+
+.character:hover{
+transform:scale(1.1);
+border-color:red;
+box-shadow:0 0 30px red,0 0 60px red;
+}
+
+/* NAVBAR SCROLL EFFECT */
+
+.navbar.scrolled{
+background:rgba(0,0,0,0.95);
+box-shadow:0 0 20px red;
+}
+
+/* BUTTON GLOW */
+
+.hero button{
+padding:15px 40px;
+background:red;
+border:none;
+font-size:18px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:0 0 15px red;
+}
+
+.hero button:hover{
+transform:scale(1.1);
+box-shadow:0 0 40px red;
+}
+
+/* FIGHTER SELECT GRID */
+
+.fighterSelect{
+padding:120px 60px;
+text-align:center;
+background:linear-gradient(135deg,#30003d,#001a33);
+}
+
+.fighterSelect h1{
+font-size:60px;
+color:white;
+margin-bottom:10px;
+}
+
+.fighterSelect p{
+color:#00eaff;
+font-size:22px;
+margin-bottom:60px;
+}
+
+.fighterGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:20px;
+max-width:1200px;
+margin:auto;
+}
+
+.fighterCard{
+background:#111;
+border:2px solid #444;
+overflow:hidden;
+cursor:pointer;
+transition:0.3s;
+}
+
+.fighterCard img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.fighterCard h3{
+color:white;
+padding:10px;
+font-size:20px;
+}
+
+.fighterCard:hover{
+transform:scale(1.08);
+border-color:#ff0055;
+box-shadow:0 0 20px #ff0055;
+}
+
+/* ANIMATION */
+
+
+@keyframes glow{
+
+0%{text-shadow:0 0 10px red;}
+100%{text-shadow:0 0 40px red;}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LIVE BACKGROUND VIDEO -->
+<video autoplay muted loop playsinline id="bgVideo">
+    <source src="video/tekken8wallpaper.mp4" type="video/mp4">
+</video>
+<!-- NAV -->
+
+<nav class="navbar">
+
+<div class="nav-left">
+<h2 class="logo">TEKKEN 8</h2>
+</div>
+
+<div class="nav-center">
+<a href="#story">Story</a>
+<a href="#characters">Fighters</a>
+<a href="#modes">Modes</a>
+<a href="#news">News</a>
+</div>
+
+<div class="nav-right">
+
+<i class="fab fa-discord"></i>
+<i class="fab fa-youtube"></i>
+<i class="fab fa-instagram"></i>
+<i class="fab fa-facebook"></i>
+<i class="fab fa-twitter"></i>
+
+<button class="buyBtn">BUY NOW →</button>
+
+</div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<!-- REVIEW SLIDER -->
+
+<section class="reviewSlider">
+
+<div class="slides">
+
+<div class="slide">
+
+<video autoplay muted loop playsinline class="slideVideo">
+ <source src="video/tekken8wallpaper.mp4" type="video/mp4">
+</video>
+
+<!-- DARK OVERLAY -->
+<div class="darkOverlay"></div>
+
+<!-- RIGHT SIDE CONTENT -->
+<div class="heroContent">
+<h1>TEKKEN 8</h1>
+<h2>FIST MEETS FATE</h2>
+<button class="buyBtn">BUY NOW</button>
+
+<div class="platforms">
+<img src="images/PS5Logo.jpg">
+<span>PS5</span>
+<img src="images/xboxlogo.png">
+<span>XBOX SERIES X|S</span>
+<img src="images/steamlogo.png">
+<span>STEAM</span>
+</div>
+</div>
+
+</div>
+
+<div class="slide">
+
+<img src="images/ReinaSitting.jpg">
+
+<!-- SCORES LEFT -->
+<div class="reviewScore left top">
+    <h1>9<span>/10</span></h1>
+    <p>SCREEN RANT</p>
+</div>
+
+<div class="reviewScore left middle">
+    <h1>9<span>/10</span></h1>
+    <p>WCCFTECH</p>
+</div>
+
+<div class="reviewScore left bottom">
+    <h1>9<span>/10</span></h1>
+    <p>CG MAG</p>
+</div>
+
+<!-- SCORES RIGHT -->
+<div class="reviewScore right top">
+    <h1>5<span>/5</span></h1>
+    <p>HARDCORE GAMER</p>
+</div>
+
+<div class="reviewScore right middle">
+    <h1>9<span>/10</span></h1>
+    <p>DOT ESPORTS</p>
+</div>
+
+<div class="reviewScore right bottom">
+    <h1>9<span>/10</span></h1>
+    <p>VENTUREBEAT</p>
+</div>
+
+</div>
+
+</div>
+
+<button onclick="scrollToSection()">Explore</button>
+
+</section>
+
+</section>
+
+<!-- FIGHTER SELECT -->
+
+<section class="fighterSelect">
+
+<h1>SELECT YOUR FIGHTER</h1>
+<p>THE KING OF IRON FIST TOURNAMENT AWAITS YOU</p>
+
+<div class="fighterGrid">
+
+<div class="fighterCard" onclick="location.href='KazuyaV1.html'">
+<img src="images/kazuya.png">
+<h3>KAZUYA</h3>
+</div>
+
+<div class="fighterCard">
+<img src="images/jin kazama.jpg">
+<h3>JIN</h3>
+</div>
+
+<div class="fighterCard">
+<img src="images/Anna.webp">
+<h3>ANNA</h3>
+</div>
+
+<div class="fighterCard">
+<img src="images/Nina.jpg">
+<h3>NINA</h3>
+</div>
+
+<div class="fighterCard">
+<img src="images/paul.png">
+<h3>PAUL</h3>
+</div>
+
+<div class="fighterCard" onclick="location.href='LawV1.html'">
+<img src="images/marshall law.png">
+<h3>LAW</h3>
+</div>
+    
+<div class="fighterCard" onclick="location.href='KingV1.html'">
+<img src="images/king.png">
+<h3>KING</h3>
+</div>
+
+<div class="fighterCard">
+<img src="images/yoshi.jpg">
+<h3>YOSHIMITSU</h3>
+</div>
+
+<div class="fighterCard">
+<img src="images/stevefox.png">
+<h3>STEVE FOX</h3>
+</div>
+    
+<div class="fighterCard">
+<img src="images/raven.jpg">
+<h3>RAVEN</h3>
+</div>
+    
+<div class="fighterCard">
+<img src="images/zafina.jpg">
+<h3>ZAFINA</h3>
+</div>
+    
+<div class="fighterCard">
+<img src="images/bryanfury.jpg">
+<h3>BRYAN FURY</h3>
+</div>
+    
+</div>
+
+</section>
+
+
+
+<button class="prev">❮</button>
+<button class="next">❯</button>
+
+</section>
+
+<!-- REVIEW SECTION -->
+
+<section class="review">
+
+<video autoplay muted loop class="reviewVideo">
+<source src="video/tekken8gid.mp4" type="video/mp4">
+</video>
+
+<div class="reviewContent">
+
+<h2>Critics Love Tekken 8</h2>
+
+<p>
+Tekken 8 delivers the most aggressive combat system in the series
+with stunning visuals and explosive battles between Jin Kazama
+and Kazuya Mishima.
+</p>
+
+<button class="watchBtn">WATCH NOW</button>
+
+</div>
+
+</section>
+
+<!-- CHARACTERS -->
+
+<section class="section" id="characters">
+
+<h2>Most Used Fighters</h2>
+
+<div class="characters">
+
+<div class="character" onclick="location.href='jin.html'">
+<img src="images/jin kazama.jpg">
+<h3>Jin Kazama</h3>
+</div>
+
+<div class="character" onclick="location.href='kazuya.html'">
+<img src="images/kazuya.png">
+<h3>Kazuya Mishima</h3>
+</div>
+
+<div class="character" onclick="location.href='paul.html'">
+<img src="images/paul.png">
+<h3>Paul Phoenix</h3>
+</div>
+
+<div class="character" onclick="location.href='law.html'">
+<img src="images/marshall%20law.png">
+<h3>Marshall Law</h3>
+</div>
+
+</div>
+
+</section>
+
+<!-- GAME MODES -->
+
+<section class="section" id="modes">
+
+<h2>Game Modes</h2>
+
+<div class="modes">
+
+<div class="mode">
+<h3>Arcade Quest</h3>
+<p>Learn the basics and battle rivals across arcades.</p>
+</div>
+
+<div class="mode">
+<h3>Tekken Ball</h3>
+<p>A fun volleyball-style combat mode.</p>
+</div>
+
+<div class="mode">
+<h3>Customization</h3>
+<p>Create your own fighter style and appearance.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TRAILER -->
+
+<section class="trailer">
+
+<h1>Tekken 8 Trailer</h1>
+
+<iframe src="https://www.youtube.com/embed/07FdDRbdurg"
+allowfullscreen></iframe>
+
+</section>
+
+<!-- PARALLAX -->
+
+<section class="parallax">
+King of Iron Fist Tournament
+</section>
+
+<!-- STORY -->
+
+<section class="section" id="story">
+
+<h2>Story</h2>
+
+<p>
+The Mishima family conflict continues as Jin Kazama faces his father Kazuya in a battle that threatens the entire world.
+</p>
+
+</section>
+
+<!-- NEWS -->
+
+<section class="section" id="news">
+
+<h2>Latest News</h2>
+
+<div class="modes">
+
+<div class="mode">
+<h3>Tekken 8 Update</h3>
+<p>New balance patch improves gameplay.</p>
+</div>
+
+<div class="mode">
+<h3>New Character</h3>
+<p>Eddy Gordo joins the Tekken roster.</p>
+</div>
+
+<div class="mode">
+<h3>World Tour</h3>
+<p>The Tekken World Tour returns this year.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h1>Tekken Fan Website</h1>
+
+<div>
+<a href="https://www.instagram.com/tekken/?hl=en" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://x.com/TEKKEN?lang=en" target="_blank">
+<i class="fab fa-twitter"></i>
+</a>
+
+<a href="https://www.youtube.com/channel/UC_ntXHv-XdKCD7CPynVvnQw" target="_blank">
+<i class="fab fa-youtube"></i>
+</a>
+</div>
+
+</footer>
+
+<button id="topBtn" onclick="topFunction()">↑</button>
+
+<script>
+
+/* EXPLORE BUTTON */
+
+function scrollToSection(){
+document.getElementById("characters").scrollIntoView({behavior:"smooth"});
+}
+
+/* SCROLL ANIMATION */
+
+window.addEventListener("scroll",function(){
+
+let elements=document.querySelectorAll(".mode,.character");
+
+elements.forEach(el=>{
+
+let position=el.getBoundingClientRect().top;
+let screen=window.innerHeight;
+
+if(position<screen-100){
+
+el.style.opacity="1";
+el.style.transform="translateY(0)";
+
+}
+
+});
+
+/* BACK TO TOP BUTTON */
+
+let btn=document.getElementById("topBtn");
+
+if(document.documentElement.scrollTop>400){
+btn.style.display="block";
+}else{
+btn.style.display="none";
+}
+
+});
+
+/* TOP BUTTON */
+
+function topFunction(){
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+</script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+let index = 0;
+const slides = document.querySelector(".slides");
+const totalSlides = document.querySelectorAll(".slide").length;
+
+document.querySelector(".next").onclick = () => {
+index = (index + 1) % totalSlides;
+updateSlide();
+};
+
+document.querySelector(".prev").onclick = () => {
+index = (index - 1 + totalSlides) % totalSlides;
+updateSlide();
+};
+
+function updateSlide(){
+slides.style.transform = "translateX(-" + (index * 100) + "%)";
+}
+
+setInterval(() => {
+index = (index + 1) % totalSlides;
+updateSlide();
+}, 5000);
+
+});
+
+</script>    
+
+<script>
+
+/* EXPLORE BUTTON */
+
+function scrollToSection(){
+document.getElementById("characters").scrollIntoView({behavior:"smooth"});
+}
+
+/* SCROLL ANIMATION */
+
+window.addEventListener("scroll",function(){
+
+let elements=document.querySelectorAll(".mode,.character");
+
+elements.forEach(el=>{
+
+let position=el.getBoundingClientRect().top;
+let screen=window.innerHeight;
+
+if(position<screen-100){
+el.style.opacity="1";
+el.style.transform="translateY(0)";
+}
+
+});
+
+});  
+
+</body>
+</html>
